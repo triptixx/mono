@@ -174,6 +174,6 @@ LABEL org.label-schema.name="mono-runtime" \
 COPY --from=builder /output/ /
 
 RUN apk add --no-cache libgcc sqlite-libs; \
-    apk add --no-cache --virtual=.build-deps ca-certificates; \
+    apk add --no-cache ca-certificates; \
     cert-sync /etc/ssl/certs/ca-certificates.crt; \
-    apk del --no-cache .build-deps
+    apk del --no-cache ca-certificates
