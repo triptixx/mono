@@ -3,7 +3,7 @@
 [git]: https://github.com/triptixx/mono-runtime
 [actions]: https://github.com/triptixx/mono-runtime/actions
 
-# [loxoo/mono][hub] - Mono runtime docker image
+# [loxoo/mono-runtime][hub] - Mono runtime docker image
 [![Layers](https://images.microbadger.com/badges/image/loxoo/mono-runtime.svg)][mbdg]
 [![Latest Version](https://images.microbadger.com/badges/version/loxoo/mono-runtime.svg)][hub]
 [![Git Commit](https://images.microbadger.com/badges/commit/loxoo/mono-runtime.svg)][git]
