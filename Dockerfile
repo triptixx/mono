@@ -5,7 +5,7 @@ FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
 ARG MONO_VER
 
-### install jackett
+### install mono-runtime
 WORKDIR /output
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing mono=${MONO_VER}; \
     cp -a --parents /usr/lib/mono/4.5/gacutil.exe .; \
