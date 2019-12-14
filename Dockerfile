@@ -147,10 +147,10 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/te
         System.Xml.Linq \
         System.Xml.Serialization \
         WebMatrix.Data \
-        WindowsBase
-    do
-        cp -a --parents /usr/lib/mono/4.5/${asm}.dll .
-        cp -a --parents /usr/lib/mono/gac/${asm} .
+        WindowsBase; \
+    do \
+        cp -a --parents /usr/lib/mono/4.5/${asm}.dll .; \
+        cp -a --parents /usr/lib/mono/gac/${asm} .; \
     done; \
     cp -a --parents /usr/bin/cert-sync .; \
     cp -a --parents /usr/lib/mono/4.5/cert-sync.exe .; \
@@ -174,6 +174,6 @@ LABEL org.label-schema.name="mono-runtime" \
 COPY --from=builder /output/ /
 
 RUN apk add --no-cache libgcc sqlite-libs; \
-    apk add --no-cache --virtual=.build-dependencies ca-certificates; \
+    apk add --no-cache --virtual=.build-deps ca-certificates; \
     cert-sync /etc/ssl/certs/ca-certificates.crt; \
-    apk del .build-dependencies
+    apk del --no-cache .build-deps
