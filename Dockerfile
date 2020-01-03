@@ -43,6 +43,6 @@ LABEL org.label-schema.name="mono-runtime" \
 
 COPY --from=builder /output/ /
 
-RUN apk add --no-cache ca-certificates; \
+RUN apk add --no-cache libgcc ca-certificates; \
     cert-sync /etc/ssl/certs/ca-certificates.crt; \
     apk del --no-cache ca-certificates
