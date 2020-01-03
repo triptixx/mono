@@ -10,7 +10,7 @@ ARG MONO_BUILD=/mono-build
 WORKDIR /mono-src
 RUN apk add --no-cache build-base autoconf libtool automake cmake linux-headers python git zlib-dev krb5-dev libx11-dev; \
     wget -O- https://download.mono-project.com/sources/mono/mono-${MONO_VER}.tar.xz | tar xJ --strip-components=1; \
-    ./autogen.sh --disable-boehm \
+    ./configure --disable-boehm \
                 --enable-small-config \
                 --without-x \
                 --without-sigaltstack \
