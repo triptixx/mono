@@ -8,7 +8,7 @@ ARG MONO_BUILD=/mono-build
 
 ### install mono-runtime
 WORKDIR /mono-src
-RUN apk add --no-cache build-base autoconf libtool automake cmake linux-headers python git zlib-dev krb5-dev libx11-dev; \
+RUN apk add --no-cache build-base autoconf libtool automake cmake linux-headers python git zlib-dev; \
     wget -O- https://download.mono-project.com/sources/mono/mono-${MONO_VER}.tar.xz | tar xJ --strip-components=1; \
     ./configure --disable-boehm \
                 --enable-small-config \
@@ -43,6 +43,6 @@ LABEL org.label-schema.name="mono-runtime" \
 
 COPY --from=builder /output/ /
 
-RUN apk add --no-cache libgcc krb5-libs ca-certificates; \
+RUN apk add --no-cache libgcc ca-certificates; \
     cert-sync /etc/ssl/certs/ca-certificates.crt; \
     apk del --no-cache ca-certificates
