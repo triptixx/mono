@@ -1,7 +1,6 @@
 /usr/local/bin/cert-sync
 /usr/local/bin/gacutil
 /usr/local/bin/mono
-/usr/local/bin/mono-hang-watchdog
 /usr/local/bin/mono-sgen
 /usr/local/etc/mono/2.0
 /usr/local/etc/mono/4.0

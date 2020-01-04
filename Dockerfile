@@ -1,5 +1,5 @@
 ARG ALPINE_TAG=3.11
-ARG MONO_VER=6.6.0.161
+ARG MONO_VER=6.0.0.334
 
 FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
@@ -8,18 +8,15 @@ ARG MONO_BUILD=/mono-build
 
 ### install mono-runtime
 WORKDIR /mono-src
-RUN apk add --no-cache build-base autoconf libtool automake cmake linux-headers python git zlib-dev; \
+RUN apk add --no-cache build-base autoconf automake libtool cmake linux-headers zlib-dev python git; \
     wget -O- https://download.mono-project.com/sources/mono/mono-${MONO_VER}.tar.xz | tar xJ --strip-components=1; \
     ./configure --disable-boehm \
                 --enable-small-config \
                 --without-x \
                 --without-sigaltstack \
-                --with-compiler-server=no \
-                --with-mcs-docs=no \
-                --with-csc=mcs; \
+                --with-mcs-docs=no; \
     make; \
-    make install DESTDIR=${MONO_BUILD}; \
-    find ${MONO_BUILD} -exec sh -c 'file "{}" | grep -q ELF && strip --strip-debug "{}"' \;
+    make install DESTDIR=${MONO_BUILD}
 
 WORKDIR $MONO_BUILD
 COPY libmono.txt /tmp/
@@ -28,7 +25,8 @@ RUN mkdir /output; \
         cp -a --parents ".${line}" /output/; \
     done < /tmp/libmono.txt; \
     find ./usr/local/lib/mono/4.5/ -iname *.dll -type l -exec cp -a --parents {} /output/ \; \
-        -exec sh -c 'cp -a --parents ./usr/local/lib/mono/gac/$(basename "$1" .dll) /output/' _ {} \;
+        -exec sh -c 'cp -a --parents ./usr/local/lib/mono/gac/$(basename "$1" .dll) /output/' _ {} \;; \
+    find /output/ -exec sh -c 'file "{}" | grep -q ELF && strip --strip-debug "{}"' \;
 
 #=============================================================
 
