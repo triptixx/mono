@@ -1,5 +1,5 @@
 ARG ALPINE_TAG=3.11
-ARG MONO_VER=6.0.0.334
+ARG MONO_VER=6.8.0.105
 
 FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
