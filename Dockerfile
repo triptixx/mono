@@ -8,7 +8,7 @@ ARG MONO_BUILD=/mono-build
 
 ### install mono-runtime
 WORKDIR /mono-src
-RUN apk add --no-cache build-base autoconf automake libtool cmake linux-headers zlib-dev python git; \
+RUN apk add --no-cache build-base autoconf automake libtool cmake linux-headers zlib-dev python3 git; \
     wget -O- https://download.mono-project.com/sources/mono/mono-${MONO_VER}.tar.xz | tar xJ --strip-components=1; \
     ./configure --disable-boehm \
                 --enable-small-config \
