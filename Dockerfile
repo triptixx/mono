@@ -16,6 +16,7 @@ RUN apk add --no-cache build-base autoconf automake libtool cmake linux-headers 
                 --without-x \
                 --without-sigaltstack \
                 --with-mcs-docs=no; \
+    make get-monolite-latest; \
     make; \
     make install DESTDIR=${MONO_BUILD}
 
