@@ -1,5 +1,5 @@
 ARG ALPINE_TAG=3.12
-ARG MONO_VER=6.8.0.123
+ARG MONO_VER=6.13.0.630
 
 FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
@@ -10,7 +10,7 @@ ARG MONO_BUILD=/mono-build
 WORKDIR /mono-src
 RUN apk add --no-cache build-base autoconf automake libtool cmake linux-headers zlib-dev python3 git; \
     ln -s /usr/bin/python3 /usr/bin/python; \
-    wget -O- https://download.mono-project.com/sources/mono/mono-${MONO_VER}.tar.xz | tar xJ --strip-components=1; \
+    wget -O- https://download.mono-project.com/sources/mono/nightly/mono-${MONO_VER}.tar.xz | tar xJ --strip-components=1; \
     ./configure --disable-boehm \
                 --enable-small-config \
                 --without-x \
