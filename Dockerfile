@@ -1,5 +1,5 @@
 ARG ALPINE_TAG=3.12
-ARG MONO_VER=6.13.0.603
+ARG MONO_VER=6.13.0
 
 FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
@@ -8,14 +8,14 @@ ARG MONO_BUILD=/mono-build
 
 ### install mono-runtime
 WORKDIR /mono-src
-RUN apk add --no-cache build-base autoconf automake libtool cmake linux-headers zlib-dev python3 git; \
+RUN apk add --no-cache build-base autoconf automake libtool cmake linux-headers zlib-dev python3 git gettext curl; \
     ln -s /usr/bin/python3 /usr/bin/python; \
-    wget -O- https://download.mono-project.com/sources/mono/nightly/mono-${MONO_VER}.tar.xz | tar xJ --strip-components=1; \
-    ./configure --disable-boehm \
-                --enable-small-config \
-                --without-x \
-                --without-sigaltstack \
-                --with-mcs-docs=no; \
+    git clone https://github.com/mono/mono.git --branch master --depth 1 .; \
+    ./autogen.sh --disable-boehm \
+                 --enable-small-config \
+                 --without-x \
+                 --without-sigaltstack \
+                 --with-mcs-docs=no; \
     make get-monolite-latest; \
     make; \
     make install DESTDIR=${MONO_BUILD}
