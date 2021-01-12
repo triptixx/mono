@@ -30,7 +30,7 @@ RUN mkdir /output; \
         -exec sh -c 'cp -a --parents ./usr/local/lib/mono/gac/$(basename "$1" .dll) /output/' _ {} \;; \
     find /output/ -exec sh -c 'file "{}" | grep -q ELF && strip --strip-debug "{}"' \;
 
-#=============================================================
+#==============================================================
 
 FROM loxoo/alpine:${ALPINE_TAG}
 
